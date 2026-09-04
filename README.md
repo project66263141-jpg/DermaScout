@@ -1,95 +1,77 @@
-# DermaScout 🩺🔍
+# DermaScout
 
-> **Offline-First AI Skin Lesion Screening & Multi-Lingual Diagnostic Guidance Application**
+DermaScout is an offline-first mobile app designed for real-time skin lesion screening in low-resource environments. It runs an ONNX deep learning classification model directly on the smartphone, giving field workers, nurses, and local clinics instant diagnostic feedback and visual attention heatmaps without requiring internet connectivity or cloud servers.
 
-![Flutter](https://img.shields.io/badge/Flutter-3.29-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-1.4.1-00599C?style=for-the-badge&logo=onnx&logoColor=white)
-![Offline First](https://img.shields.io/badge/Offline_AI-100%25-green?style=for-the-badge)
-![Languages](https://img.shields.io/badge/Languages-English%20%7C%20Hindi%20%7C%20Kannada-orange?style=for-the-badge)
+## Overview
 
----
+In many rural clinics and remote field settings, reliable internet access is unavailable, making cloud-based AI medical tools impractical. DermaScout solves this by embedding an optimized deep learning model directly inside a Flutter Android application via native C++ FFI bindings.
 
-## 📌 Executive Summary
+The application allows users to capture skin lesion images, automatically crops and formats the ROI (region of interest), runs local inference, and renders an explainable AI heatmap showing which regions of the lesion influenced the prediction.
 
-**DermaScout** is a specialized, offline-first mobile medical screening application designed to assist healthcare workers, field nurses, and individuals in rural or resource-constrained settings with rapid, on-device skin lesion screening.
+## Key Capabilities
 
-By leveraging an optimized **32-bit FP32 ONNX deep learning model** running locally via ONNX Runtime, DermaScout delivers real-time AI classification and **Visual Attention Heatmaps (Grad-CAM)** without requiring any cloud server or internet connection.
+- **Offline Inference**: Executes an ONNX vision model locally using `onnxruntime` native bindings, running fully offline with low latency.
+- **Disease Categorization**: Classifies lesions into four distinct categories:
+  - Melanocytic Nevus (benign mole)
+  - Actinic Keratosis (pre-cancerous mark)
+  - Melanoma / Basal Cell Carcinoma (cancer)
+  - Healthy Skin
+- **Visual Attention Heatmap**: Computes channel-averaged feature activations from the model's bottleneck layer to overlay a thermal heatmap on top of the lesion image.
+- **Tri-Lingual Interface**: Instant language switching between English, Hindi, and Kannada.
+- **Field-Ready Design**: Simple quality check interface (clear vs. blurry warning), precise corner reticle framing, and straightforward user flows tailored for health workers in rural settings.
 
----
+## Model Technical Summary
 
-## ✨ Key Features
-
-- **⚡ 100% Offline Deep Learning Inference**: Uses local ONNX Runtime execution (`assets/models/dermascout_int8.onnx`) for instant, private screening.
-- **🩺 Clinical Disease Classification**:
-  - **Melanocytic Nevus** *(benign mole)*
-  - **Actinic Keratosis** *(pre-cancerous mark)*
-  - **Melanoma / Basal Cell Carcinoma** *(skin cancer)*
-  - **Healthy Skin** *(normal skin)*
-- **🔥 AI Focus Heatmap (Explainable AI)**: Visualizes feature activation maps directly over the photo and in a dedicated diagnostic preview card so users can inspect where the AI focused its attention.
-- **🌐 Tri-Lingual Support**: One-tap instant language toggle across **English**, **Hindi (हिन्दी)**, and **Kannada (ಕನ್ನಡ)**.
-- **🌾 Rural-Clinic UX**: Simplified image quality verification (Clear & Sharp vs. Blurry: Retake) designed specifically for field conditions without overwhelming users with complex technical metrics.
-- **🎯 Precision Reticle Guidance**: Crisp orange framing reticle corners for centering lesions during photo capture.
-
----
-
-## 📊 Model & Performance Overview
-
-| Property | Specification |
+| Parameter | Specification |
 | :--- | :--- |
-| **Model Format** | ONNX 32-bit FP32 (`dermascout_fp32`) |
-| **Input Shape** | `[1, 3, 320, 320]` (NCHW format) |
-| **Normalization** | ImageNet Mean `[0.485, 0.456, 0.406]`, Std `[0.229, 0.224, 0.225]` |
-| **Output Tensors** | 1. `logits` `[1, 4]`<br>2. `feature_map` `[1, 1536, 10, 10]` |
-| **Heatmap Normalization**| Robust Percentile Scaling ($p_{15} \rightarrow p_{95}$) with border artifact suppression |
+| **Model Format** | ONNX 32-bit Floating Point (`dermascout_fp32`) |
+| **Input Tensor** | `[1, 3, 320, 320]` (NCHW format, ImageNet normalized) |
+| **Output Tensors** | 1. `logits`: `[1, 4]` classification vector<br>2. `feature_map`: `[1, 1536, 10, 10]` activation grid |
+| **Heatmap Scaling** | Channel-wise mean reduction followed by percentile thresholding ($p_{15}$ to $p_{95}$) and bilinear scaling |
 
----
-
-## 🛠️ Architecture & Tech Stack
+## Tech Stack
 
 - **Framework**: Flutter 3.29 / Dart 3.7
-- **AI Engine**: `onnxruntime` v1.4.1 (Native C++ FFI)
-- **State Management**: `provider` v6.1.2
-- **Image Processing**: `image` v4.9.2
-- **Typography**: Google Fonts (IBM Plex Serif, IBM Plex Sans, IBM Plex Mono)
+- **Inference Engine**: ONNX Runtime 1.4.1 (C++ FFI)
+- **State Management**: Provider
+- **Image Preprocessing**: `image` package
+- **UI & Typography**: Custom Flutter material design with IBM Plex typography
 
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Flutter SDK `^3.29.0`
-- Android Studio / VS Code with Flutter extension
-- Android Device running Android 7.0+ (API 24+)
 
-### Build & Run
-```bash
-# 1. Clone the repository
-git clone https://github.com/project66263141-jpg/DermaScout.git
-cd DermaScout
+- Flutter SDK (3.29 or newer)
+- Android SDK (API level 24 / Android 7.0 minimum)
+- An Android test device or emulator
 
-# 2. Install dependencies
-flutter pub get
+### Installation and Running
 
-# 3. Analyze codebase
-flutter analyze
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/project66263141-jpg/DermaScout.git
+   cd DermaScout
+   ```
 
-# 4. Run on connected Android device
-flutter run --release
-```
+2. Fetch dependencies:
+   ```bash
+   flutter pub get
+   ```
 
-### Build APK
-```bash
-flutter build apk --release
-```
+3. Run on a connected Android device:
+   ```bash
+   flutter run --release
+   ```
 
----
+4. Build a standalone release APK:
+   ```bash
+   flutter build apk --release
+   ```
 
-## ⚠️ Medical Disclaimer
+## Disclaimer
 
-> **IMPORTANT**: DermaScout is an offline AI-assisted screening tool intended solely for preliminary assessment and educational guidance. It **does NOT constitute a formal medical diagnosis**. Users must always consult a licensed medical doctor or certified dermatologist for professional clinical evaluation.
+DermaScout is a screening tool built to assist preliminary assessment in field environments. It is not a replacement for professional clinical judgment or formal dermatological biopsy. Any suspected malignant lesion should be referred to a qualified physician or dermatologist for evaluation.
 
----
+## License
 
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

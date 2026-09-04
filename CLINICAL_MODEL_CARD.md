@@ -1,4 +1,4 @@
-# Clinical Model Card 🩺
+# Clinical Model Card
 
 ## Model Metadata
 
@@ -17,14 +17,14 @@
 
 | Class Index | Label | Medical Name | Clinical Category | Severity Tier |
 | :---: | :--- | :--- | :--- | :--- |
-| **0** | `mole` | **Melanocytic Nevus** | Benign Mole | Low Risk (Teal) |
-| **1** | `cancer` | **Melanoma / Basal Cell Carcinoma** | Skin Cancer | High Risk (Red) |
-| **2** | `precancer` | **Actinic Keratosis** | Pre-Cancerous Mark | Elevated Risk (Orange) |
-| **3** | `healthy` | **Healthy Skin** | Normal Skin | Clear (Green) |
+| **0** | `mole` | **Melanocytic Nevus** | Benign Mole | Low Risk |
+| **1** | `cancer` | **Melanoma / Basal Cell Carcinoma** | Skin Cancer | High Risk |
+| **2** | `precancer` | **Actinic Keratosis** | Pre-Cancerous Mark | Elevated Risk |
+| **3** | `healthy` | **Healthy Skin** | Normal Skin | Clear |
 
 ---
 
-## Visual Explanability (Grad-CAM Feature Map)
+## Visual Explainability (Grad-CAM Feature Map)
 
 The model exposes a secondary tensor `feature_map` of shape `[1, 1536, 10, 10]`. 
 By averaging activations across the 1536 feature channels and applying percentile normalization, DermaScout renders an Explainable AI (XAI) thermal heatmap indicating the focal regions that influenced the model's prediction.

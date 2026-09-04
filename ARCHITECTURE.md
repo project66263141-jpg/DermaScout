@@ -1,4 +1,4 @@
-# System Architecture & Technical Specifications 🏗️
+# System Architecture & Technical Specifications
 
 ## 1. System Overview
 
@@ -37,7 +37,7 @@ graph TD
 3. **Heatmap Normalization**:
    - Corner padding artifacts (`[0,0]`, `[0,9]`, `[9,0]`, `[9,9]`) are suppressed.
    - Robust percentile scaling ($p_{15} \rightarrow p_{95}$) computes continuous thermal values (0.0 to 1.0).
-   - Rendered using custom Canvas painting with a thermal colormap (Yellow $\rightarrow$ Orange $\rightarrow$ Red).
+   - Rendered using custom Canvas painting with a thermal colormap (Yellow -> Orange -> Red).
 
 4. **Localization & Presentation**:
    - `AppState` broadcasts state updates to listening UI components.
