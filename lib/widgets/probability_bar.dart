@@ -16,7 +16,7 @@ class ProbabilityBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pctString = '\%';
+    final pctString = '${(percentage * 100).toStringAsFixed(1)}%';
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
