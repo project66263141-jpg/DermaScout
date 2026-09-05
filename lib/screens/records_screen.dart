@@ -106,10 +106,16 @@ class RecordsScreen extends StatelessWidget {
                   final analysis = record.analysis;
                   final modelResult = record.modelResult;
                   final topLabel = modelResult.topLabel ?? 'healthy';
-                  final tier = _getTierForLabel(topLabel);
+                  final tier = modelResult.finalTier;
                   final tierColor = AppTheme.getTierColor(tier);
                   final tierWash = AppTheme.getTierWash(tier);
-                  final diseaseInfo = AppLocalization.getDiseaseInfo(lang, topLabel);
+                  final diseaseInfo = AppLocalization.getDiseaseInfo(
+                    lang,
+                    topLabel,
+                    isEscalated: modelResult.isEscalated,
+                    rawModelPickLabel: modelResult.rawModelPickLabel,
+                    cancerProb: modelResult.labelProbabilities?['cancer'] ?? modelResult.confidence ?? 0.0,
+                  );
                   final confidencePct = ((modelResult.confidence ?? 0.0) * 100).round();
 
                   return Container(
@@ -256,10 +262,16 @@ class RecordsScreen extends StatelessWidget {
   void _showRecordDetails(BuildContext context, ScanRecord record, String lang) {
     final modelResult = record.modelResult;
     final topLabel = modelResult.topLabel ?? 'healthy';
-    final diseaseInfo = AppLocalization.getDiseaseInfo(lang, topLabel);
-    final tier = _getTierForLabel(topLabel);
+    final tier = modelResult.finalTier;
     final tierColor = AppTheme.getTierColor(tier);
     final tierWash = AppTheme.getTierWash(tier);
+    final diseaseInfo = AppLocalization.getDiseaseInfo(
+      lang,
+      topLabel,
+      isEscalated: modelResult.isEscalated,
+      rawModelPickLabel: modelResult.rawModelPickLabel,
+      cancerProb: modelResult.labelProbabilities?['cancer'] ?? modelResult.confidence ?? 0.0,
+    );
     final probs = modelResult.labelProbabilities ?? {'healthy': 1.0};
 
     showModalBottomSheet(

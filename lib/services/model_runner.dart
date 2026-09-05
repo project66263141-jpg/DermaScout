@@ -5,11 +5,22 @@ import 'package:flutter/services.dart';
 import 'package:onnxruntime/onnxruntime.dart';
 import 'package:image/image.dart' as img;
 
+const double kCancerThreshold = 0.35;
+const double kPrecancerThreshold = 0.55;
+
 class ModelInferenceResult {
   final bool isModelLoaded;
   final String modelStatusMessage;
-  /// The raw winning class name exactly as the model outputs: healthy / mole / precancer / cancer
+  /// The final decided class name (healthy / mole / precancer / cancer) after applying safety thresholds
   final String? topLabel;
+  /// Final decision tier (0=healthy, 1=mole, 2=precancer, 3=cancer)
+  final int finalTier;
+  /// Raw argmax model pick index (0, 1, 2, 3)
+  final int rawModelPickIndex;
+  /// Raw argmax model pick label
+  final String rawModelPickLabel;
+  /// Whether decision was escalated due to safety cutoff (e.g. cancer >= 0.35)
+  final bool isEscalated;
   final double? confidence;
   final Map<String, double>? labelProbabilities;
   /// 10×10 normalised heatmap values (0.0–1.0), averaged across feature_map channels
@@ -20,6 +31,10 @@ class ModelInferenceResult {
     required this.isModelLoaded,
     required this.modelStatusMessage,
     this.topLabel,
+    this.finalTier = 0,
+    this.rawModelPickIndex = 0,
+    this.rawModelPickLabel = 'healthy',
+    this.isEscalated = false,
     this.confidence,
     this.labelProbabilities,
     this.heatmap,
@@ -64,12 +79,12 @@ class ModelRunner {
     return false;
   }
 
-  /// Run raw ONNX inference on image bytes with ZERO extra logic or math:
+  /// Run raw ONNX inference on image bytes with safety threshold decision rules:
   ///   1. Decode image & bake EXIF orientation
   ///   2. Center crop (60% square) & resize 320×320
   ///   3. Normalize Float32 NCHW (0-1, subtract mean, divide std)
   ///   4. Run ONNX session
-  ///   5. Softmax logits → argmax → raw model prediction
+  ///   5. Softmax logits → Safety cutoff escalation check (Cancer >= 0.35 -> Tier 3)
   static Future<ModelInferenceResult> runInference(Uint8List imageBytes) async {
     final available = await isModelAvailable();
     if (!available || _ortSession == null) {
@@ -142,11 +157,25 @@ class ModelRunner {
         out?.release();
       }
 
-      // ── 5. Pure Softmax → Argmax (Pure Raw Model Output) ───────────────────
+      // ── 5. Softmax & Safety Escalation Decision Rule ──────────────────────
       final probs = _softmax(logits);
-      int topIdx = 0;
-      for (int i = 1; i < probs.length; i++) {
-        if (probs[i] > probs[topIdx]) topIdx = i;
+      int top = 0;
+      for (int i = 1; i < 4; i++) {
+        if (probs[i] > probs[top]) top = i;
+      }
+
+      final cancer = probs[3];
+      final precancer = probs[2];
+
+      int finalTier = top;
+      bool escalated = false;
+
+      if (cancer >= kCancerThreshold) {
+        finalTier = 3; // cancer
+        escalated = (top != 3);
+      } else if (precancer >= kPrecancerThreshold && top != 2) {
+        finalTier = 2; // precancer
+        escalated = true;
       }
 
       final probMap = <String, double>{
@@ -156,8 +185,12 @@ class ModelRunner {
       return ModelInferenceResult(
         isModelLoaded: true,
         modelStatusMessage: 'Inference complete',
-        topLabel: _classes[topIdx],
-        confidence: probs[topIdx],
+        topLabel: _classes[finalTier],
+        finalTier: finalTier,
+        rawModelPickIndex: top,
+        rawModelPickLabel: _classes[top],
+        isEscalated: escalated,
+        confidence: escalated ? cancer : probs[finalTier],
         labelProbabilities: probMap,
         heatmap: heatmap,
       );

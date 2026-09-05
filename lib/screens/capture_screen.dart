@@ -847,8 +847,14 @@ class _CaptureScreenState extends State<CaptureScreen> with WidgetsBindingObserv
     final appState = Provider.of<AppState>(context, listen: false);
     final lang = appState.currentLanguage;
 
-    final String rawLabel = result.topLabel ?? '';
-    final diseaseInfo = AppLocalization.getDiseaseInfo(lang, rawLabel);
+    final String rawLabel = result.topLabel ?? 'healthy';
+    final diseaseInfo = AppLocalization.getDiseaseInfo(
+      lang,
+      rawLabel,
+      isEscalated: result.isEscalated,
+      rawModelPickLabel: result.rawModelPickLabel,
+      cancerProb: result.labelProbabilities?['cancer'] ?? result.confidence ?? 0.0,
+    );
 
     final Color cardColor;
     final Color borderColor;
@@ -859,23 +865,23 @@ class _CaptureScreenState extends State<CaptureScreen> with WidgetsBindingObserv
       borderColor = AppTheme.tierAmber;
       icon = Icons.pending_actions_rounded;
     } else {
-      switch (rawLabel) {
-        case 'cancer':
+      switch (result.finalTier) {
+        case 3:
           cardColor = AppTheme.tierRedWash;
           borderColor = AppTheme.tierRed;
           icon = Icons.warning_rounded;
           break;
-        case 'precancer':
-          cardColor = const Color(0xFFFFF3E0);
-          borderColor = Colors.orange;
+        case 2:
+          cardColor = AppTheme.tierOrangeWash;
+          borderColor = AppTheme.tierOrange;
           icon = Icons.report_problem_outlined;
           break;
-        case 'mole':
-          cardColor = AppTheme.tealWash;
-          borderColor = AppTheme.tealDeep;
+        case 1:
+          cardColor = AppTheme.tierAmberWash;
+          borderColor = AppTheme.tierAmber;
           icon = Icons.radio_button_checked_rounded;
           break;
-        case 'healthy':
+        case 0:
         default:
           cardColor = AppTheme.tierGreenWash;
           borderColor = AppTheme.tierGreen;

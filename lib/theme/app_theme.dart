@@ -16,17 +16,17 @@ class AppTheme {
   static const Color bloomDeep = Color(0xFFB8431F);
   static const Color bloomWash = Color(0xFFFBE1D3);
 
-  static const Color tierGreen = Color(0xFF3F7A4A);
-  static const Color tierGreenWash = Color(0xFFE3EFE2);
+  static const Color tierGreen = Color(0xFF2E7D32);
+  static const Color tierGreenWash = Color(0xFFE8F5E9);
 
-  static const Color tierAmber = Color(0xFFA87A1E);
-  static const Color tierAmberWash = Color(0xFFF7EBCF);
+  static const Color tierAmber = Color(0xFFF9A825);
+  static const Color tierAmberWash = Color(0xFFFFFDE7);
 
-  static const Color tierOrange = Color(0xFFB95F1E);
-  static const Color tierOrangeWash = Color(0xFFF9E4CE);
+  static const Color tierOrange = Color(0xFFEF6C00);
+  static const Color tierOrangeWash = Color(0xFFFFF3E0);
 
-  static const Color tierRed = Color(0xFFAC4029);
-  static const Color tierRedWash = Color(0xFFF6DED6);
+  static const Color tierRed = Color(0xFFC62828);
+  static const Color tierRedWash = Color(0xFFFFEBEE);
 
   static const Color tierGrey = Color(0xFF63665F);
   static const Color tierGreyWash = Color(0xFFE9E6DD);

@@ -100,80 +100,80 @@ class AppLocalization {
   static const Map<String, Map<String, DiseaseInfo>> _diseaseData = {
     'en': {
       'healthy': DiseaseInfo(
-        medicalName: 'Healthy Skin',
-        categoryName: 'Normal Skin',
-        description: 'Normal healthy skin detected. No obvious pathological lesion found.',
-        actionText: 'Keep monitoring your skin regularly. Recheck if anything appears.',
+        medicalName: 'Healthy skin',
+        categoryName: 'Normal skin',
+        description: 'Nothing found on this patch of skin.',
+        actionText: 'No action needed. Recheck if something new appears.',
       ),
       'mole': DiseaseInfo(
-        medicalName: 'Melanocytic Nevus',
-        categoryName: 'Benign Mole',
-        description: 'Common harmless pigmented skin mole.',
-        actionText: 'Likely harmless. Recheck in 3 months or if size/shape changes.',
+        medicalName: 'Melanocytic nevus',
+        categoryName: 'Ordinary mole',
+        description: 'An ordinary mole. Not cancer.',
+        actionText: 'Likely harmless. Recheck in 3 months if it changes.',
       ),
       'precancer': DiseaseInfo(
-        medicalName: 'Actinic Keratosis',
-        categoryName: 'Pre-Cancerous Mark',
-        description: 'Pre-cancerous sun-damaged skin lesion.',
-        actionText: 'Consult a dermatologist within a few weeks for early preventive treatment.',
+        medicalName: 'Actinic keratosis',
+        categoryName: 'Pre-cancerous',
+        description: 'Sun-damaged skin that can turn into cancer if left alone.',
+        actionText: 'Pre-cancerous. See a doctor within a few weeks.',
       ),
       'cancer': DiseaseInfo(
-        medicalName: 'Melanoma / Basal Cell Carcinoma',
-        categoryName: 'Skin Cancer',
-        description: 'Malignant or aggressive skin lesion detected.',
-        actionText: 'Medical evaluation by a dermatologist strongly recommended soon.',
+        medicalName: 'Melanoma or basal cell carcinoma',
+        categoryName: 'Skin cancer',
+        description: 'Signs consistent with skin cancer.',
+        actionText: 'See a doctor soon. Do not wait for it to change further.',
       ),
     },
     'hi': {
       'healthy': DiseaseInfo(
-        medicalName: 'स्वस्थ त्वचा (Healthy Skin)',
+        medicalName: 'स्वस्थ त्वचा (Healthy skin)',
         categoryName: 'सामान्य त्वचा',
-        description: 'सामान्य स्वस्थ त्वचा पाई गई। कोई स्पष्ट बीमारी या निशान नहीं मिला।',
-        actionText: 'अपनी त्वचा की नियमित निगरानी रखें। यदि कोई नया निशान दिखाई दे तो जांच कराएं।',
+        description: 'त्वचा के इस हिस्से पर कुछ नहीं मिला।',
+        actionText: 'किसी कार्रवाई की आवश्यकता नहीं है। यदि कुछ नया दिखाई दे तो मुरुजांच करें।',
       ),
       'mole': DiseaseInfo(
-        medicalName: 'मेलानोसाइटिक नेवस (Melanocytic Nevus)',
-        categoryName: 'साधारण मस्सा (Benign Mole)',
-        description: 'साधारण हानिरहित त्वचा का मस्सा/तिल।',
-        actionText: 'संभवतः हानिरहित। 3 महीने में दोबारा जांचें या यदि आकार/रंग बदले तो डॉक्टर को दिखाएं।',
+        medicalName: 'मेलानोसाइटिक नेवस (Melanocytic nevus)',
+        categoryName: 'साधारण मस्सा',
+        description: 'एक साधारण मस्सा। कैंसर नहीं।',
+        actionText: 'संभवतः हानिरहित। 3 महीने में दोबारा जांचें यदि यह बदलता है।',
       ),
       'precancer': DiseaseInfo(
-        medicalName: 'एक्टिनिक केराटोसिस (Actinic Keratosis)',
-        categoryName: 'कैंसर-पूर्व निशान (Pre-Cancerous)',
-        description: 'धूप से क्षतिग्रस्त कैंसर-पूर्व त्वचा का निशान।',
-        actionText: 'शुरुआती बचाव के लिए कुछ हफ्तों के भीतर त्वचा विशेषज्ञ से सलाह लें।',
+        medicalName: 'एक्टिनिक केराटोसिस (Actinic keratosis)',
+        categoryName: 'कैंसर-पूर्व',
+        description: 'धूप से क्षतिग्रस्त त्वचा जो अकेले रहने पर कैंसर बन सकती है।',
+        actionText: 'कैंसर-पूर्व। कुछ हफ्तों के भीतर डॉक्टर को दिखाएं।',
       ),
       'cancer': DiseaseInfo(
-        medicalName: 'मेलेनोमा / बेसल सेल कार्सिनोमा (Skin Cancer)',
-        categoryName: 'त्वचा का कैंसर (Skin Cancer)',
-        description: 'संभावित त्वचा कैंसर या आक्रामक निशान का पता चला।',
-        actionText: 'त्वचा रोग विशेषज्ञ से जल्द से जल्द डॉक्टरी जांच कराने की सख्त सिफारिश की जाती है।',
+        medicalName: 'मेलेनोमा या बेसल सेल कार्सिनोमा (Skin cancer)',
+        categoryName: 'त्वचा का कैंसर',
+        description: 'त्वचा कैंसर के अनुरूप लक्षण।',
+        actionText: 'जल्द ही डॉक्टर को दिखाएं। इसके और बदलने का इंतजार न करें।',
       ),
     },
     'kn': {
       'healthy': DiseaseInfo(
-        medicalName: 'ಆರೋಗ್ಯಕರ ಚರ್ಮ (Healthy Skin)',
+        medicalName: 'ಆರೋಗ್ಯಕರ ಚರ್ಮ (Healthy skin)',
         categoryName: 'ಸಾಮಾನ್ಯ ಚರ್ಮ',
-        description: 'ಸಾಮಾನ್ಯ ಆರೋಗ್ಯಕರ ಚರ್ಮ ಕಂಡುಬಂದಿದೆ. ಯಾವುದೇ ತೊಂದರೆ ಇಲ್ಲ.',
-        actionText: 'ನಿಮ್ಮ ಚರ್ಮವನ್ನು ನಿಯಮಿತವಾಗಿ ಗಮನಿಸಿ. ಹೊಸ ಮಚ್ಚೆಗಳು ಕಂಡುಬಂದರೆ ಪರೀಕ್ಷಿಸಿ.',
+        description: 'ಚರ್ಮದ ಈ ಭಾಗದಲ್ಲಿ ಏನೂ ಕಂಡುಬಂದಿಲ್ಲ.',
+        actionText: 'ಯಾವುದೇ ಕ್ರಮ ಅಗತ್ಯವಿಲ್ಲ. ಹೊಸದೇನಾದರೂ ಕಾಣಿಸಿಕೊಂಡರೆ ಮರುಪರಿಶೀಲಿಸಿ.',
       ),
       'mole': DiseaseInfo(
-        medicalName: 'ಮೆಲನೋಸೈಟಿಕ್ ನೇವಸ್ (Melanocytic Nevus)',
-        categoryName: 'ಸಾಮಾನ್ಯ ಮಚ್ಚೆ (Benign Mole)',
-        description: 'ಹಾನಿಯಿಲ್ಲದ ಚರ್ಮದ ಸಾಮಾನ್ಯ ಮಚ್ಚೆ/ತಿಲಕ.',
-        actionText: 'ಸಾಮಾನ್ಯವಾಗಿ ಹಾನಿಯಿಲ್ಲ. 3 ತಿಂಗಳಲ್ಲಿ ಮರುಪರಿಶೀಲಿಸಿ ಅಥವಾ ಗಾತ್ರ/ಬಣ್ಣ ಬದಲಾದರೆ ವೈದ್ಯರನ್ನು ಭೇಟಿಯಾಗಿ.',
+        medicalName: 'ಮೆಲನೋಸೈಟಿಕ್ ನೇವಸ್ (Melanocytic nevus)',
+        categoryName: 'ಸಾಮಾನ್ಯ ಮಚ್ಚೆ',
+        description: 'ಸಾಮಾನ್ಯ ಮಚ್ಚೆ. ಕ್ಯಾನ್ಸರ್ ಅಲ್ಲ.',
+        actionText: 'ಸಾಮಾನ್ಯವಾಗಿ ಹಾನಿಯಿಲ್ಲ. ಬದಲಾದರೆ 3 ತಿಂಗಳಲ್ಲಿ ಮರುಪರಿಶೀಲಿಸಿ.',
       ),
       'precancer': DiseaseInfo(
-        medicalName: 'ಆಕ್ಟಿನಿಕ್ ಕೆರಾಟೋಸಿಸ್ (Actinic Keratosis)',
-        categoryName: 'ಕ್ಯಾನ್ಸರ್ ಮುನ್ನಾದಿ ಮಚ್ಚೆ (Pre-Cancerous)',
-        description: 'ಬಿಸಿಲಿನಿಂದ ಉಂಟಾದ ಕ್ಯಾನ್ಸರ್‌ಗೆ ಕಾರಣವಾಗಬಹುದಾದ ಚರ್ಮದ ಮಚ್ಚೆ.',
-        actionText: 'ಆರಂಭಿಕ ಚಿಕಿತ್ಸೆಗಾಗಿ ಕೆಲವು ವಾರಗಳ ಒಳಗೆ ಚರ್ಮ ವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+        medicalName: 'ಆಕ್ಟಿನಿಕ್ ಕೆರಾಟೋಸಿಸ್ (Actinic keratosis)',
+        categoryName: 'ಕ್ಯಾನ್ಸರ್ ಮುನ್ನಾದಿ',
+        description: 'ಬಿಸಿಲಿನಿಂದ ಉಂಟಾದ ಚರ್ಮ, ಇದು ಹಾಗೆಯೇ ಬಿಟ್ಟರೆ ಕ್ಯಾನ್ಸರ್ ಆಗಬಹುದು.',
+        actionText: 'ಕ್ಯಾನ್ಸರ್ ಮುನ್ನಾದಿ. ಕೆಲವು ವಾರಗಳ ಒಳಗೆ ವೈದ್ಯರನ್ನು ಭೇಟಿಯಾಗಿ.',
       ),
       'cancer': DiseaseInfo(
-        medicalName: 'ಮೆಲನೋಮ / ಬೇಸಲ್ ಸೆಲ್ ಕಾರ್ಸಿನೋಮ (Skin Cancer)',
-        categoryName: 'ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್ (Skin Cancer)',
-        description: 'ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್ ಸಾಧ್ಯತೆ ಕಂಡುಬಂದಿದೆ.',
-        actionText: 'ತಕ್ಷಣ ಚರ್ಮ ರೋಗ ತಜ್ಞರಿಂದ ವೈದ್ಯಕೀಯ ತಪಾಸಣೆ ಮಾಡಿಸಿಕೊಳ್ಳುವುದು ಅತ್ಯಗತ್ಯ.',
+        medicalName: 'ಮೆಲನೋಮ ಅಥವಾ ಬೇಸಲ್ ಸೆಲ್ ಕಾರ್ಸಿನೋಮ (Skin cancer)',
+        categoryName: 'ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್',
+        description: 'ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್‌ಗೆ ಸೂಕ್ತವಾದ ಚಿಹ್ನೆಗಳು.',
+        actionText: 'ತಕ್ಷಣ ವೈದ್ಯರನ್ನು ಭೇಟಿಯಾಗಿ. ಮತ್ತಷ್ಟು ಬದಲಾಗಲು ಕಾಯಬೇಡಿ.',
       ),
     },
   };
@@ -183,15 +183,50 @@ class AppLocalization {
     return map[key] ?? _uiStrings['en']![key] ?? key;
   }
 
-  static DiseaseInfo getDiseaseInfo(String lang, String labelKey) {
+  static DiseaseInfo getDiseaseInfo(
+    String lang,
+    String labelKey, {
+    bool isEscalated = false,
+    String? rawModelPickLabel,
+    double cancerProb = 0.0,
+    int cutoffPct = 35,
+  }) {
+    if (isEscalated) {
+      final pickInfo = getDiseaseInfo(lang, rawModelPickLabel ?? 'mole');
+      final int cancerPct = (cancerProb * 100).round();
+
+      if (lang == 'hi') {
+        return DiseaseInfo(
+          medicalName: 'संभावित त्वचा कैंसर (Possible skin cancer)',
+          categoryName: 'संभावित त्वचा कैंसर',
+          description: 'निकटतम मिलान ${pickInfo.medicalName} था, लेकिन कैंसर का संकेत $cancerPct% तक पहुंच गया — हमारी $cutoffPct% सुरक्षा सीमा से ऊपर।',
+          actionText: 'यह एक सावधानी है, निदान नहीं। पुष्टि के लिए डॉक्टर को दिखाएं।',
+        );
+      } else if (lang == 'kn') {
+        return DiseaseInfo(
+          medicalName: 'ಸಾಧ್ಯತೆಯ ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್ (Possible skin cancer)',
+          categoryName: 'ಸಾಧ್ಯತೆಯ ಚರ್ಮದ ಕ್ಯಾನ್ಸರ್',
+          description: 'ಹತ್ತಿರದ ಹೊಂದಾಣಿಕೆ ${pickInfo.medicalName} ಆಗಿತ್ತು, ಆದರೆ ಕ್ಯಾನ್ಸರ್ ಸಿಗ್ನಲ್ $cancerPct% ಗೆ ತಲುಪಿದೆ — ನಮ್ಮ $cutoffPct% ಸುರಕ್ಷತಾ ಮಿತಿಗಿಂತ ಹೆಚ್ಚು.',
+          actionText: 'ಇದು ಮುನ್ನೆಚ್ಚರಿಕೆ, ರೋಗನಿರ್ಣಯವಲ್ಲ. ಖಚಿತಪಡಿಸಲು ವೈದ್ಯರನ್ನು ಭೇಟಿಯಾಗಿ.',
+        );
+      } else {
+        return DiseaseInfo(
+          medicalName: 'Possible skin cancer',
+          categoryName: 'Possible skin cancer',
+          description: 'The closest match was ${pickInfo.medicalName}, but the cancer signal reached $cancerPct% — above our $cutoffPct% safety cutoff.',
+          actionText: 'This is a precaution, not a diagnosis. See a doctor to confirm.',
+        );
+      }
+    }
+
     final langMap = _diseaseData[lang] ?? _diseaseData['en']!;
     return langMap[labelKey.toLowerCase()] ??
         langMap['healthy'] ??
         const DiseaseInfo(
-          medicalName: 'Unknown',
-          categoryName: 'Unclassified',
-          description: 'No classification',
-          actionText: 'Consult a doctor.',
+          medicalName: 'Healthy skin',
+          categoryName: 'Normal skin',
+          description: 'Nothing found on this patch of skin.',
+          actionText: 'No action needed. Recheck if something new appears.',
         );
   }
 }
